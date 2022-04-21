@@ -47,12 +47,7 @@ function App() {
           GrouningPadChecked: false,
         },
       },
-      vals: [
-        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-      ],
+
       IntraOperativeAssesmentBottom: {
         TimeinRecovery: "",
         TimeDischarged: "",
@@ -99,6 +94,8 @@ function App() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  console.log("values", values);
 
   return (
     <>
@@ -384,15 +381,14 @@ function App() {
               </div>
             </div>
 
-            {/* {[0, 1, 2, 3].map((d) => (
+            {[0, 1, 2, 3].map((d) => (
               <div className={`flex mt-4 ml-${d !== 0 ? 5 : 0}`} key={d}>
                 <div className="flex mt-2 ">
                   {d === 0 && (
                     <input
                       type="checkbox"
                       className="mt-[6px] mr-2"
-                      name="IntraOperativeAssessmentTop.GroundingPad
-                      .GrouningPadChecked"
+                      name="IntraOperativeAssessmentTop.GroundingPad.GrouningPadChecked"
                       value={
                         values.IntraOperativeAssessmentTop.GroundingPad
                           .GrouningPadChecked
@@ -403,8 +399,7 @@ function App() {
                   <div>Time: </div>
                   <input
                     type="text"
-                    name={`IntraOperativeAssessmentTop
-                      .vals[${d}].Time`}
+                    name={`IntraOperativeAssessmentTop.vals[${d}].Time`}
                     value={values.IntraOperativeAssessmentTop.vals[d].Time}
                     className="border-b-2 border-black focus:outline-none w-28 ml-5"
                     onChange={handleChange}
@@ -415,8 +410,7 @@ function App() {
                   <input
                     type="text"
                     onChange={handleChange}
-                    name={`IntraOperativeAssessmentTop
-                      .vals[${d}].BP`}
+                    name={`IntraOperativeAssessmentTop.vals[${d}].BP`}
                     value={values.IntraOperativeAssessmentTop.vals[d].BP}
                     className="border-b-2 border-black focus:outline-none w-28 ml-5"
                   />
@@ -426,11 +420,8 @@ function App() {
                   <input
                     type="text"
                     onChange={handleChange}
-                    name={`IntraOperativeAssessmentTop.GroundingPad
-                      .vals[${d}].P`}
-                    value={
-                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d].P
-                    }
+                    name={`IntraOperativeAssessmentTop.vals[${d}].P`}
+                    value={values.IntraOperativeAssessmentTop.vals[d].P}
                     className="border-b-2 border-black focus:outline-none w-28 ml-5"
                   />
                 </div>
@@ -438,12 +429,9 @@ function App() {
                   <div>RR:</div>
                   <input
                     type="text"
+                    name={`IntraOperativeAssessmentTop.vals[${d}].RR`}
+                    value={values.IntraOperativeAssessmentTop.vals[d].RR}
                     onChange={handleChange}
-                    name={`IntraOperativeAssessmentTop.GroundingPad
-                      .vals[${d}].RR`}
-                    value={
-                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d].RR
-                    }
                     className="border-b-2 border-black focus:outline-none w-28 ml-5"
                   />
                 </div>
@@ -451,13 +439,9 @@ function App() {
                   <div>02:</div>
                   <input
                     type="text"
+                    name={`IntraOperativeAssessmentTop.vals[${d}].T02`}
+                    value={values.IntraOperativeAssessmentTop.vals[d].T02}
                     onChange={handleChange}
-                    name={`IntraOperativeAssessmentTop.GroundingPad
-                      .vals[${d}].T02`}
-                    value={
-                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d]
-                        .T02
-                    }
                     className="border-b-2 border-black focus:outline-none w-28 ml-5"
                   />
                 </div>
@@ -466,221 +450,7 @@ function App() {
                   <div className="border-b-2 w-40 border-black" />
                 </div>
               </div>
-            ))} */}
-
-            {/* <div className="flex mt-4 ml-5">
-              <div className="flex mt-2 ">
-                <div>Time: </div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[1].Time"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].Time
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>BP:</div>x
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[1].BP"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].BP
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2">
-                <div>P:</div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[1].P"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].P
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>RR:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[1].RR"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].RR
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>02:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[1].T02"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].T02
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex font-semibold mt-2">
-                <div>Initials:</div>
-                <div className="border-b-2 w-40 border-black" />
-              </div>
-            </div>
-            <div className="flex mt-4 ml-5">
-              <div className="flex mt-2 ">
-                <div>Time: </div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[2].Time"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].Time
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>BP:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[2].BP"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].BP
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2">
-                <div>P:</div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[2].P"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].P
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>RR:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[2].RR"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].RR
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>02:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[2].T02"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].T02
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex font-semibold mt-2">
-                <div>Initials:</div>
-                <div className="border-b-2 w-40 border-black" />
-              </div>
-            </div>
-            <div className="flex mt-4 ml-5">
-              <div className="flex mt-2 ">
-                <div>Time: </div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[3].Time"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].Time
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>BP:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[3].BP"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].BP
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2">
-                <div>P:</div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[3].P"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].P
-                  }
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>RR:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[3].RR"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].RR
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex mt-2 ">
-                <div>02:</div>
-                <input
-                  type="text"
-                  name="IntraOperativeAssessmentTop.GroundingPad
-                      .vals[3].T02"
-                  value={
-                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].T02
-                  }
-                  onChange={handleChange}
-                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                />
-              </div>
-              <div className="flex font-semibold mt-2">
-                <div>Initials:</div>
-                <div className="border-b-2 w-40 border-black" />
-              </div>
-            </div> */}
+            ))}
           </div>
           <div className="text-xl font-semibold   underline mt-10 mb-5">
             INTRA-OPERATIVE ASSESSMENT:
