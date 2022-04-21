@@ -3,16 +3,20 @@ import { useFormik } from "formik";
 function App() {
   const { handleChange, handleSubmit, values } = useFormik({
     initialValues: {
-      InformedConsentSignatureVerified: { Informedchkbox: false, initials: "" },
-      RNPresenceVerified: { RNPresenceChkbox: false, initials: "" },
+      InformedConsentSignatureVerified: { chkbox: false, initials: "" },
+      RNPresenceVerified: { chkbox: false, initials: "" },
       NPO: {
-        NpoChkbox: false,
+        chkbox: false,
         NpoInitials: "",
         NPO2: false,
         NPO4: false,
         NPO8: false,
       },
-      driverWillAccompany: { chkbox: false, Patientinitials: "" },
+      driverWillAccompany: {
+        chkbox: false,
+        Patientinitials: "",
+        ReleaseTo: "",
+      },
       NoDriver: {
         chkbox: false,
         initials: "",
@@ -29,20 +33,26 @@ function App() {
         EndTime: "",
         Flouro: "",
         Min: "",
+        vals: [
+          { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+          { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+          { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+          { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+        ],
         GroundingPad: {
           timePlaced: "",
           Site: "",
           Condition: "",
           TimeRemoved: "",
           GrouningPadChecked: false,
-          RestValues: [
-            { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-            { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-            { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-            { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
-          ],
         },
       },
+      vals: [
+        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+        { Time: "", BP: "", P: "", RR: "", T02: "", Initials: "" },
+      ],
       IntraOperativeAssesmentBottom: {
         TimeinRecovery: "",
         TimeDischarged: "",
@@ -90,8 +100,6 @@ function App() {
     },
   });
 
-  console.log("valyes", values);
-
   return (
     <>
       <form
@@ -110,8 +118,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] mr-2"
-                  name="Informedchkbox"
-                  value={values.InformedConsentSignatureVerified.Informedchkbox}
+                  name="InformedConsentSignatureVerified.chkbox"
+                  value={values.InformedConsentSignatureVerified.chkbox}
                   onChange={handleChange}
                 />
                 <div className="font-normal">
@@ -128,8 +136,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] mr-2"
-                  name="RNPresenceChkbox"
-                  value={values.RNPresenceVerified.RNPresenceChkbox}
+                  name="RNPresenceVerified.chkbox"
+                  value={values.RNPresenceVerified.chkbox}
                   onChange={handleChange}
                 />
                 <div className="font-normal">RN Presence Verified</div>
@@ -141,12 +149,19 @@ function App() {
             </div>
             <div className="flex justify-between text-lg font-semibold">
               <div className="flex ">
-                <input type="checkbox" className="mt-[6px] mr-2" />
+                <input
+                  type="checkbox"
+                  className="mt-[6px] mr-2"
+                  name="NPO.chkbox"
+                  onChange={handleChange}
+                  value={values.NPO.chkbox}
+                />
                 <div className="font-normal ">NPO Status:</div>
                 <input
                   type="checkbox"
                   className="mt-[6px] ml-10"
-                  value={values.NPO.chkbox}
+                  name="NPO.NPO2"
+                  value={values.NPO.NPO2}
                   onChange={handleChange}
                 />
                 <div className="ml-2 font-normal">2hr</div>
@@ -154,6 +169,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] ml-4"
+                  name="NPO.NPO4"
+                  value={values.NPO.NPO4}
                   onChange={handleChange}
                 />
                 <div className="ml-2 font-normal">4hr</div>
@@ -161,6 +178,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] ml-4"
+                  name="NPO.NPO8"
+                  value={values.NPO.NPO8}
                   onChange={handleChange}
                 />
                 <div className="ml-2 font-normal">8hr</div>
@@ -175,6 +194,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] mr-2"
+                  value={values.driverWillAccompany.chkbox}
+                  name="driverWillAccompany.chkbox"
                   onChange={handleChange}
                 />
                 <div className="font-normal ">
@@ -188,6 +209,8 @@ function App() {
                   <input
                     type="text"
                     onChange={handleChange}
+                    value={values.driverWillAccompany.ReleaseTo}
+                    name="driverWillAccompany.ReleaseTo"
                     className="border-b-2 border-black focus:outline-none w-40 ml-5"
                   />
                 </div>
@@ -202,6 +225,8 @@ function App() {
                 <input
                   type="checkbox"
                   className="mt-[6px] mr-2"
+                  value={values.NoDriver.chkbox}
+                  name="NoDriver.chkbox"
                   onChange={handleChange}
                 />
                 <div className="font-normal">No Driver Required</div>
@@ -259,6 +284,8 @@ function App() {
               <div>TIME OUT TIME :</div>
               <input
                 onChange={handleChange}
+                value={values.IntraOperativeAssessmentTop.TimeOutTime}
+                name="IntraOperativeAssessmentTop.TimeOutTime"
                 type="text"
                 className="border-b-2 border-black focus:outline-none w-40 ml-5"
               />
@@ -269,6 +296,8 @@ function App() {
                 <input
                   onChange={handleChange}
                   type="text"
+                  value={values.IntraOperativeAssessmentTop.PocedureStartTime}
+                  name="IntraOperativeAssessmentTop.PocedureStartTime"
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
@@ -277,6 +306,8 @@ function App() {
                 <input
                   onChange={handleChange}
                   type="text"
+                  value={values.IntraOperativeAssessmentTop.EndTime}
+                  name="IntraOperativeAssessmentTop.EndTime"
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
@@ -284,6 +315,8 @@ function App() {
                 <div>FLOURO:</div>
                 <input
                   onChange={handleChange}
+                  value={values.IntraOperativeAssessmentTop.Flouro}
+                  name="IntraOperativeAssessmentTop.Flouro"
                   type="text"
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -292,6 +325,8 @@ function App() {
                 <div>MIN:</div>
                 <input
                   onChange={handleChange}
+                  value={values.IntraOperativeAssessmentTop.Min}
+                  name="IntraOperativeAssessmentTop.Min"
                   type="text"
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -305,6 +340,10 @@ function App() {
                 <div>Time placed: </div>
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad.timePlaced"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.timePlaced
+                  }
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -313,6 +352,8 @@ function App() {
                 <div>Site: </div>
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad.Site"
+                  value={values.IntraOperativeAssessmentTop.GroundingPad.Site}
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -322,6 +363,10 @@ function App() {
                 <input
                   type="text"
                   onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad.Condition"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.Condition
+                  }
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
@@ -329,29 +374,123 @@ function App() {
                 <div>Time Removed:</div>
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad.TimeRemoved"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.TimeRemoved
+                  }
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
             </div>
 
-            <div className="flex mt-4">
+            {/* {[0, 1, 2, 3].map((d) => (
+              <div className={`flex mt-4 ml-${d !== 0 ? 5 : 0}`} key={d}>
+                <div className="flex mt-2 ">
+                  {d === 0 && (
+                    <input
+                      type="checkbox"
+                      className="mt-[6px] mr-2"
+                      name="IntraOperativeAssessmentTop.GroundingPad
+                      .GrouningPadChecked"
+                      value={
+                        values.IntraOperativeAssessmentTop.GroundingPad
+                          .GrouningPadChecked
+                      }
+                      onChange={handleChange}
+                    />
+                  )}
+                  <div>Time: </div>
+                  <input
+                    type="text"
+                    name={`IntraOperativeAssessmentTop
+                      .vals[${d}].Time`}
+                    value={values.IntraOperativeAssessmentTop.vals[d].Time}
+                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="flex mt-2 ">
+                  <div>BP:</div>
+                  <input
+                    type="text"
+                    onChange={handleChange}
+                    name={`IntraOperativeAssessmentTop
+                      .vals[${d}].BP`}
+                    value={values.IntraOperativeAssessmentTop.vals[d].BP}
+                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                  />
+                </div>
+                <div className="flex mt-2">
+                  <div>P:</div>
+                  <input
+                    type="text"
+                    onChange={handleChange}
+                    name={`IntraOperativeAssessmentTop.GroundingPad
+                      .vals[${d}].P`}
+                    value={
+                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d].P
+                    }
+                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                  />
+                </div>
+                <div className="flex mt-2 ">
+                  <div>RR:</div>
+                  <input
+                    type="text"
+                    onChange={handleChange}
+                    name={`IntraOperativeAssessmentTop.GroundingPad
+                      .vals[${d}].RR`}
+                    value={
+                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d].RR
+                    }
+                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                  />
+                </div>
+                <div className="flex mt-2 ">
+                  <div>02:</div>
+                  <input
+                    type="text"
+                    onChange={handleChange}
+                    name={`IntraOperativeAssessmentTop.GroundingPad
+                      .vals[${d}].T02`}
+                    value={
+                      values.IntraOperativeAssessmentTop.GroundingPad.vals[d]
+                        .T02
+                    }
+                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                  />
+                </div>
+                <div className="flex font-semibold mt-2">
+                  <div>Initials:</div>
+                  <div className="border-b-2 w-40 border-black" />
+                </div>
+              </div>
+            ))} */}
+
+            {/* <div className="flex mt-4 ml-5">
               <div className="flex mt-2 ">
-                <input
-                  type="checkbox"
-                  className="mt-[6px] mr-2"
-                  onChange={handleChange}
-                />
                 <div>Time: </div>
                 <input
                   type="text"
+                  onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[1].Time"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].Time
+                  }
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
               <div className="flex mt-2 ">
-                <div>BP:</div>
+                <div>BP:</div>x
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[1].BP"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].BP
+                  }
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -361,6 +500,11 @@ function App() {
                 <input
                   type="text"
                   onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[1].P"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].P
+                  }
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
               </div>
@@ -368,6 +512,11 @@ function App() {
                 <div>RR:</div>
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[1].RR"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].RR
+                  }
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -376,6 +525,11 @@ function App() {
                 <div>02:</div>
                 <input
                   type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[1].T02"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[1].T02
+                  }
                   onChange={handleChange}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -385,146 +539,148 @@ function App() {
                 <div className="border-b-2 w-40 border-black" />
               </div>
             </div>
-            <div className="ml-5">
-              <div className="flex mt-4">
-                <div className="flex mt-2 ">
-                  <div>Time: </div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>BP:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2">
-                  <div>P:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>RR:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>02:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex font-semibold mt-2">
-                  <div>Initials:</div>
-                  <div className="border-b-2 w-40 border-black" />
-                </div>
+            <div className="flex mt-4 ml-5">
+              <div className="flex mt-2 ">
+                <div>Time: </div>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[2].Time"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].Time
+                  }
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
               </div>
-              <div className="flex mt-4">
-                <div className="flex mt-2 ">
-                  <div>Time: </div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>BP:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2">
-                  <div>P:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>RR:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>02:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex font-semibold mt-2">
-                  <div>Initials:</div>
-                  <div className="border-b-2 w-40 border-black" />
-                </div>
+              <div className="flex mt-2 ">
+                <div>BP:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[2].BP"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].BP
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
               </div>
-              <div className="flex mt-4">
-                <div className="flex mt-2 ">
-                  <div>Time: </div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>BP:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2">
-                  <div>P:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>RR:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex mt-2 ">
-                  <div>02:</div>
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    className="border-b-2 border-black focus:outline-none w-28 ml-5"
-                  />
-                </div>
-                <div className="flex font-semibold mt-2">
-                  <div>Initials:</div>
-                  <div className="border-b-2 w-40 border-black" />
-                </div>
+              <div className="flex mt-2">
+                <div>P:</div>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[2].P"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].P
+                  }
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2 ">
+                <div>RR:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[2].RR"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].RR
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2 ">
+                <div>02:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[2].T02"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[2].T02
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex font-semibold mt-2">
+                <div>Initials:</div>
+                <div className="border-b-2 w-40 border-black" />
               </div>
             </div>
+            <div className="flex mt-4 ml-5">
+              <div className="flex mt-2 ">
+                <div>Time: </div>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[3].Time"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].Time
+                  }
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2 ">
+                <div>BP:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[3].BP"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].BP
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2">
+                <div>P:</div>
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[3].P"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].P
+                  }
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2 ">
+                <div>RR:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[3].RR"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].RR
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex mt-2 ">
+                <div>02:</div>
+                <input
+                  type="text"
+                  name="IntraOperativeAssessmentTop.GroundingPad
+                      .vals[3].T02"
+                  value={
+                    values.IntraOperativeAssessmentTop.GroundingPad.vals[3].T02
+                  }
+                  onChange={handleChange}
+                  className="border-b-2 border-black focus:outline-none w-28 ml-5"
+                />
+              </div>
+              <div className="flex font-semibold mt-2">
+                <div>Initials:</div>
+                <div className="border-b-2 w-40 border-black" />
+              </div>
+            </div> */}
           </div>
           <div className="text-xl font-semibold   underline mt-10 mb-5">
             INTRA-OPERATIVE ASSESSMENT:
@@ -597,7 +753,7 @@ function App() {
                 <input
                   type="text"
                   onChange={handleChange}
-                  name={`IntraOperativeAssesmentBottom.vals[${d}].P`}
+                  name={`IntraOperativeAssesmentBottom.vals[${d}].RR`}
                   value={values.IntraOperativeAssesmentBottom.vals[d].RR}
                   className="border-b-2 border-black focus:outline-none w-28 ml-5"
                 />
@@ -634,7 +790,8 @@ function App() {
             <input
               type="checkbox"
               className="mt-[6px] mr-2"
-              name="PhysicianWhoPerformedProcedure"
+              name="IntraOperativeAssesmentBottom
+                  .PhysicianWhoPerformedProcedure"
               value={
                 values.IntraOperativeAssesmentBottom
                   .PhysicianWhoPerformedProcedure
@@ -652,7 +809,7 @@ function App() {
               type="checkbox"
               className="mt-[14px] mr-2"
               onChange={handleChange}
-              name="chkbox"
+              name="IntraOperativeAssesmentBottom.PhysicianSign.chkbox"
               value={values.IntraOperativeAssesmentBottom.PhysicianSign.chkbox}
             />
             <div className="flex font-semibold mt-2">
@@ -664,7 +821,7 @@ function App() {
             <input
               type="checkbox"
               className="mt-[14px] mr-2"
-              name="chkbox"
+              name="IntraOperativeAssesmentBottom.RnSign.chkbox"
               value={values.IntraOperativeAssesmentBottom.RnSign.chkbox}
               onChange={handleChange}
             />
@@ -680,7 +837,8 @@ function App() {
                 type="checkbox"
                 className="mt-[6px] mr-2"
                 onChange={handleChange}
-                name="chkbox"
+                name="IntraOperativeAssesmentBottom.DischargeInstruction
+                    .chkbox"
                 value={
                   values.IntraOperativeAssesmentBottom.DischargeInstruction
                     .chkbox
